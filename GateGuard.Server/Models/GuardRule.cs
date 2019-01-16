@@ -8,20 +8,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NFive.GateGuard.Server.Models
 {
-	public class GuardRule : IdentityModel
-	{
-		[Required]
-		[ForeignKey("PlayerUser")]
-		public Guid PlayerUserId { get; set; }
+	public class GuardRule : IdentityModel {
+		[Required] [ForeignKey("PlayerUser")] public Guid PlayerUserId { get; set; }
 
-		[JsonIgnore]
-		public virtual User PlayerUser { get; set; }
+		[JsonIgnore] public virtual User PlayerUser { get; set; }
 
 		[CanBeNull]
 		[StringLength(40, MinimumLength = 40)]
 		public string License { get; set; }
 
 		public long? SteamId { get; set; }
+
+		[CanBeNull]
+		[StringLength(18, MinimumLength = 18)]
+		public string Discord { get; set; }
 
 		[CanBeNull]
 		[StringLength(15, MinimumLength = 7)]

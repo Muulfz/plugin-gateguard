@@ -126,6 +126,8 @@ namespace NFive.GateGuard.Server
 						this.rules.Ips = this.Configuration.Rules.Ips.Union(dbRules.Where(r => r.IpAddress != null).Select(r => r.IpAddress)).ToList();
 						this.rules.Licenses = this.Configuration.Rules.Licenses.Union(dbRules.Where(r => r.License != null).Select(r => r.License)).ToList();
 						this.rules.Steam = this.Configuration.Rules.Steam.Union(dbRules.Where(r => r.SteamId.HasValue).Select(r => r.SteamId.Value)).ToList();
+						this.rules.Discord = this.Configuration.Rules.Discord.Union(dbRules.Where(r => r.Discord != null).Select(r => r.Discord)).ToList();
+
 					}
 					catch (Exception ex)
 					{
@@ -147,6 +149,7 @@ namespace NFive.GateGuard.Server
 			if (!string.IsNullOrEmpty(accessRule.License)) rule.License = accessRule.License;
 			if (accessRule.SteamId.HasValue) rule.SteamId = accessRule.SteamId;
 			if (!string.IsNullOrEmpty(accessRule.IpAddress)) rule.IpAddress = accessRule.IpAddress;
+			if (!string.IsNullOrEmpty(accessRule.Discord)) rule.Discord = accessRule.Discord;
 
 			using (var context = new StorageContext())
 			using (var transaction = context.Database.BeginTransaction())
@@ -160,6 +163,7 @@ namespace NFive.GateGuard.Server
 					if (!string.IsNullOrEmpty(rule.License)) this.rules.Licenses.Add(rule.License);
 					if (rule.SteamId.HasValue) this.rules.Steam.Add(rule.SteamId.Value);
 					if (!string.IsNullOrEmpty(rule.IpAddress)) this.rules.Ips.Add(rule.IpAddress);
+					if (!string.IsNullOrEmpty(rule.Discord)) this.rules.Discord.Add(rule.Discord);
 
 					this.Logger.Info($"Added new rule [{rule.Id}] for user {rule.PlayerUser.Name} [{rule.PlayerUser.Id}] by {rule.StaffUser.Name} for reason: {rule.Reason}");
 				}

@@ -30,14 +30,16 @@ namespace NFive.GateGuard.Server
 		public string Message { get; set; } = "You must be running Steam to play on this server";
 	}
 
-	public class RulesConfig
-	{
+	public class RulesConfig {
 		public List<string> Ips { get; set; } = new List<string>();
 
 		public List<string> Licenses { get; set; } = new List<string>();
 
 		public List<long> Steam { get; set; } = new List<long>();
-	}
+
+		public List<string> Discord { get; set; } = new List<string>();
+		
+}
 
 	public class DatabaseConfig
 	{

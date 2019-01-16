@@ -80,6 +80,9 @@ namespace NFive.GateGuard.Server
 
 			[CanBeNull]
 			public string IpAddress { get; set; }
+
+			[CanBeNull]
+			public string Discord { get; set; }
 		}
 	}
 }
